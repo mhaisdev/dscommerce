@@ -25,7 +25,13 @@ public class ProductController {
 
     @Autowired
     private ProductService service;
-
+    
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
+        ProductDTO dto = service.findById(id);
+        return ResponseEntity.ok(dto);
+    }
+    
     @GetMapping
     public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) {
         Page<ProductDTO> dto = service.findAll(pageable);
